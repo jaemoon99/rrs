@@ -25,28 +25,24 @@ public class RestaurantApi {
     }
 
     @PostMapping("/restaurant")
-    public RestaurantEntity createRestaurant(
+    public void createRestaurant(
             @RequestBody CreateAndEditRestaurantRequest request
     ) {
-        return restaurantService.createRestaurant(request);
+        restaurantService.createRestaurant(request);
     }
 
     @PutMapping("/restaurant/{restaurantId}")
-    public String editRestaurant(
+    public void editRestaurant(
             @PathVariable(name = "restaurantId") Long restaurantId,
             @RequestBody CreateAndEditRestaurantRequest request
     ) {
-        return "This is editRestaurant, " + restaurantId
-                + ", name = " + request.getName()
-                + ", address = " + request.getAddress()
-                + ", menu[0].name = " + request.getMenus().get(0).getName()
-                + ", menu[0].price = " + request.getMenus().get(0).getPrice();
+        restaurantService.editRestaurant(restaurantId, request);
     }
 
     @DeleteMapping("/restaurant/{restaurantId}")
-    public String deleteRestaurant(
+    public void deleteRestaurant(
             @PathVariable(name = "restaurantId") Long restaurantId
     ) {
-        return "This is deleteRestaurant, " + restaurantId;
+        restaurantService.deleteRestaurant(restaurantId);
     }
 }
